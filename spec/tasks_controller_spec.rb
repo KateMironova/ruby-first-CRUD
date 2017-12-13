@@ -121,6 +121,7 @@ describe TasksController, :type => :controller do
     it ' should not destroy not existed list' do
       delete :delete, params: { id: -1 }, format: :json
       expect(response).to have_http_status (:ok)
+      
     end
   end
 end
