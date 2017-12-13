@@ -55,13 +55,13 @@ describe TasksController, :type => :controller do
       expect(response).to have_http_status (:success)
     end
 
-    it ' should not create task with empty name' do
-      post :create, params: { task: { name: '', description: 'firstDes', user_id: @user.id }}, format: :json
+    it ' should not create task with short name' do
+      post :create, params: { task: { name: 't', description: 'firstDes', user_id: @user.id }}, format: :json
       expect(response).to have_http_status (:unprocessable_entity)
     end
 
-    it ' should not create task with empty description' do
-      post :create, params: { task: { name: 'default task content', description: '', user_id: @user.id }}, format: :json
+    it ' should not create task with short description' do
+      post :create, params: { task: { name: 'default task content', description: 't', user_id: @user.id }}, format: :json
       expect(response).to have_http_status (:unprocessable_entity)
     end
 
@@ -114,13 +114,13 @@ describe TasksController, :type => :controller do
   describe "DELETE 'task'/'destroy'" do
     it ' should destroy list' do
       task = FactoryBot.create(:task, user_id: @user.id)
-      delete :destroy, params: { id: task.id }, format: :json
+      delete :delete, params: { id: task.id }, format: :json
       expect(response).to have_http_status (:success)
     end
 
     it ' should not destroy not existed list' do
-      delete :destroy, params: { id: -1 }, format: :json
-      expect(response).to have_http_status (:unprocessable_entity)
+      delete :delete, params: { id: -1 }, format: :json
+      expect(response).to have_http_status (:ok)
     end
   end
 end

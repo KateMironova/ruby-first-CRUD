@@ -38,14 +38,18 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'bootstrap-datepicker-rails', '~> 1.7', '>= 1.7.1.1'
+
 group :development, :test do
-  gem 'rspec-rails', '~> 2.8'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-  gem 'factory_bot'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'shoulda-matchers'
+  gem 'rspec-rails'
+  gem 'simplecov'
 end
 
 group :development do

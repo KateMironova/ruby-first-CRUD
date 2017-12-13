@@ -22,13 +22,13 @@ ActiveRecord::Schema.define(version: 20171204201937) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id"
-    t.datetime "expiry", default: "2017-12-02 20:30:00"
+    t.datetime "expiry", default: "2017-12-13 09:04:05"
     t.integer "importance", default: 0
     t.boolean "done", default: false
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

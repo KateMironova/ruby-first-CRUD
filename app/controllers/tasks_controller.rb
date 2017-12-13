@@ -16,8 +16,12 @@ class TasksController < ApplicationController
   end
 
   def create
-    current_user.tasks.create( task_create_params)
-    redirect_to '/'
+    task = current_user.tasks.create( task_create_params)
+
+    respond_to do |format|
+      format.html { redirect_to '/' }
+      format.json { render json: task, status: :ok}
+    end
   end
 
   def update
@@ -25,20 +29,40 @@ class TasksController < ApplicationController
     if task && params[:task]
       task.update!(task_update_params)
     end
-    redirect_to '/'
+
+    respond_to do |format|
+      format.html { redirect_to '/' }
+      format.json { render json: task, status: :ok}
+    end
   end
 
   def delete
     task = current_user.tasks.find_by(id: params[:id])
     if task
       task.destroy!
+      respond_to do |format|
+        format.html { }
+        format.json { render json: task, status: :ok}
+      end
+    end
+
+    respond_to do |format|
+      format.html { }
+      format.json { render status: :unprocessable_entity}
     end
   end
 
   def edit
     @task = current_user.tasks.find_by(id: params[:id])
     unless @task
-      redirect_to '/'
+      respond_to do |format|
+        format.html { redirect_to '/' }
+        format.json { render status: :ok}
+      end
+    end
+    respond_to do |format|
+      format.html {  }
+      format.json { render json: @task, status: :ok}
     end
   end
 
