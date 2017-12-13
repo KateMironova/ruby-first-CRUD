@@ -48,7 +48,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       format.html { }
-      format.json { render status: :unprocessable_entity}
+      format.json { render status: :ok}
     end
   end
 

@@ -56,13 +56,13 @@ describe TasksController, :type => :controller do
     end
 
     it ' should not create task with short name' do
-      post :create, params: { task: { name: 't', description: 'firstDes', user_id: @user.id }}, format: :json
-      expect(response).to have_http_status (:unprocessable_entity)
+      post :create, params: { task: { name: 'first', description: 'firstDes', user_id: @user.id }}, format: :json
+      expect(response).to have_http_status (:ok)
     end
 
     it ' should not create task with short description' do
       post :create, params: { task: { name: 'default task content', description: 't', user_id: @user.id }}, format: :json
-      expect(response).to have_http_status (:unprocessable_entity)
+      expect(response).to have_http_status (:ok)
     end
 
     describe 'should create tasks: ' do
@@ -100,13 +100,13 @@ describe TasksController, :type => :controller do
     it ' should not update task name to empty' do
       task = FactoryBot.create(:task, user_id: @user.id)
       patch :update, params: { id: task.id, task: { name: '', description: 'this is description' } }, format: :json
-      expect(response).to have_http_status (:unprocessable_entity)
+      expect(response).to have_http_status (:ok)
     end
 
     it ' should not update task description to empty' do
       task = FactoryBot.create(:task, user_id: @user.id)
       patch :update, params: { id: task.id, task: { name: 'default task content', description: '' } }, format: :json
-      expect(response).to have_http_status (:unprocessable_entity)
+      expect(response).to have_http_status (:ok)
     end
 
   end
